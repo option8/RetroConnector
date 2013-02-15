@@ -14,6 +14,8 @@ Declares the matrix rows/cols of the Apple IIe keyboard.
 
 More information here:
 http://apple2.info/wiki/index.php?title=Pinouts#Apple_.2F.2Fe_Motherboard_keyboard_connector
+
+
 */
 
 const byte ROWS = 10; // rows
@@ -21,17 +23,17 @@ const byte COLS = 8; // columns
 char keys[ROWS][COLS] = {
 
 
-{      KEY_ESC,     KEY_TAB,     KEY_A,       KEY_Z,  0,0,0,0},
+{      KEY_ESC,     KEY_TAB,     KEY_A,       KEY_Z,  KEYPAD_SLASH , 0 ,  KEYPAD_ASTERIX,  0},
 
-{      KEY_1,      KEY_Q,       KEY_D,       KEY_X,  0,0,0,0},
+{      KEY_1,      KEY_Q,       KEY_D,       KEY_X,  0,  0,  0,  0},
 
-{      KEY_2,      KEY_W,       KEY_S,       KEY_C,  0,0,0,0},
+{      KEY_2,      KEY_W,       KEY_S,       KEY_C,  KEYPAD_0,  KEYPAD_4,  KEYPAD_8,  0},
 
-{      KEY_3,      KEY_E,       KEY_H,       KEY_V,  0,0,0,0},
+{      KEY_3,      KEY_E,       KEY_H,       KEY_V,  KEYPAD_1,  KEYPAD_5,  KEYPAD_9,  KEYPAD_MINUS},
 
-{      KEY_4,      KEY_R,       KEY_F,       KEY_B,  0,0,0,0},
+{      KEY_4,      KEY_R,       KEY_F,       KEY_B,  KEYPAD_2,  KEYPAD_6,  KEYPAD_PERIOD,  KEYPAD_ENTER},
 
-{      KEY_6,      KEY_Y,       KEY_G,       KEY_N,  0,0,0,0},
+{      KEY_6,      KEY_Y,       KEY_G,       KEY_N,  KEYPAD_3,  KEYPAD_7,  KEYPAD_PLUS,  0},
 
 {      KEY_5,      KEY_T,       KEY_J,       KEY_M,       KEY_BACKSLASH,     KEY_TILDE,      KEY_ENTER,  KEY_BACKSPACE},
 
