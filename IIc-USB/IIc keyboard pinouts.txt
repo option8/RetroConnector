@@ -1,0 +1,93 @@
+Keyboard matrix
+
+	X0	1	2	3	4	5	6	7	8	9
+Y0	ESC	1	2	3	4	6	5	7	8	9
+
+1	TAB	Q	W	E	R	Y	T	U	I	O
+
+2	A	D	S	H	F	G	J	K	;	L
+
+3	Z	X	C	V	B	N	M	<	>	?
+
+4							\	+	0	-
+
+5							~	P	[	]
+
+6							RET	UP	SPC	"
+
+7							DEL	DN	LT	RT
+
+
+Matrix
+	J9
+
+X0	31	
+1	24
+2	22
+3	8
+4	14
+5	6
+6	10
+7	1
+8	4
+9	2
+
+Y0	12
+1	33
+2	18
+3	20
+4	3
+5	5
+6	7
+7	9
+
+NC	13
+	17
+	30
+
+GND	21
+
+SFT	34
+CTL	32
+CMD 16
+CMD	26
+CAPS	28
+
+
+J9 pinout
+1	X7
+2	X9
+3	Y4
+4	X8
+5	Y5
+6	X5
+7	Y6
+8	X3
+9	Y7
+10	X6
+11		DISK LED (5v)
+12	Y0
+13		NC
+14	X4
+15		KEYBOARD SW
+16	CLOSED APPLE
+17		NC
+18	Y2
+19		40/80 COL SWITCH
+20	Y3
+21		GROUND ???
+22	X2
+23		GROUND ???
+24	X1
+25	POWER LED (5v)
+26	OPEN APPLE
+27		LED GROUND ???
+28	CAPS LOCK
+29		RESET
+30		NC
+31	X0
+32	CONTROL
+33	Y1
+34	SHIFT
+
+
