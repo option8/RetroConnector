@@ -38,7 +38,7 @@ X0	31	26
 Y0	12      16
 1	33      25
 2	18      7
-3	20      6
+3	20      38
 4	3       2
 5	5       1
 6	7       0
@@ -52,10 +52,10 @@ GND	21
 
 SFT	34      24
 CTL	32      23
-CMD     16      8    
-CMD	26      20
+CMD     16      43    
+CMD	26      44
 CAPS	28      21
-zzzzzzzzzzzzzzzzbbbbb
+
 
 J9 pinout
 1	X7

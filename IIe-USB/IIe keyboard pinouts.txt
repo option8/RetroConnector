@@ -1,0 +1,52 @@
+        XO      X1      X2      X3  |   X4      X5      X6      X7
+------------------------------------+--------------------------------
+YO      ESC     TAB     A       Z   |   /       )       *       ESC
+                                    |
+Y1      1!      Q       D       X   |   DOWN    UP      LEFT    RIGHT
+                                    |
+Y2      20      W       S       C   |   0       4       8       (
+                                    |
+Y3      34      E       H       V   |   1       5       9       -
+                                    |
+Y4      4$      R       F       S   |   2       6       .       RETURN
+                                    |
+Y5      6"      Y       G       N   |   3       7       +       ,
+                                    +----------------------------------
+Y6      5%      T       J       M       \|      `~      RETURN  DELETE
+
+Y7      7&      U       K       ,<      +=       P      UP       DOWN
+
+Y8      8*      I       ;:      .>      0)       [{     SPACE   LEFT
+
+Y9      9(      O       L       /?      -_       ]}      '"      RIGHT
+
+
+The RetroConnector IIe maps the 26 Apple IIe pins to Teensy++ pins
+
+IIe  Col/Row  Teensy
+1     Y0        10
+2     Y1	45
+3     +5V       +5v
+4     Y2	44
+5     SW1/CAPL  9
+6     Y3	43
+7     SW0/OAPL  8
+8     Y4	42
+9     CAPLOCK*  7
+10     Y5	41
+11     CNTL*    5
+12     Y8	40
+13     GND      GND
+14     X0	39
+15     RESET*  4
+16     X2      38
+17     X7      3
+18     X1	18
+19     X5       2
+20     X3	19
+21     X4       1
+22     Y9	20
+23     Y6      0
+24     SHFT*	21
+25     Y7      27
+26     X6	22
