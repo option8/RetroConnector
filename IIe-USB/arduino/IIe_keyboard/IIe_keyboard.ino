@@ -23,7 +23,7 @@ const byte COLS = 8; // columns
 char keys[ROWS][COLS] = {
 
 
-{      KEY_ESC,     KEY_TAB,     KEY_A,       KEY_Z,  KEYPAD_SLASH , 0 ,  KEYPAD_ASTERIX,  0},
+{      KEY_ESC,     KEY_TAB,     KEY_A,       KEY_Z,  KEYPAD_SLASH , 0 ,  KEYPAD_ASTERIX,  KEY_ESC},
 
 {      KEY_1,      KEY_Q,       KEY_D,       KEY_X,  0,  0,  0,  0},
 
@@ -119,6 +119,7 @@ const int  CTRLPin = 5;    // the pin that the control key is attached to
 const int  APPLEPin1 = 8;    // the pin that the open-apple key is attached to
 const int  APPLEPin2 = 9;    // the pin that the closed-apple key is attached to
 // these pins are special in that they are dis/connected to ground, instead of to a row/col
+const int CAPSPin = 7;
 
 
 
@@ -137,11 +138,23 @@ digitalWrite(APPLEPin2, LOW);
 
 digitalWrite(SHIFTPin, HIGH);
 digitalWrite(CTRLPin, HIGH);
+  
+  pinMode(CAPSPin, INPUT);
+  digitalWrite(CAPSPin, HIGH);
 
 }
 
 void loop()
 {
+//probably should be on an interrupt, to catch high->low transition 
+// as it is, caps lock key needs to be pressed twice
+
+char CAPSState = digitalRead(CAPSPin);
+    if (CAPSState == LOW) {
+      Keyboard.set_key6(KEY_CAPS_LOCK);
+    } else {
+      Keyboard.set_key6(0);
+    }
 
    char SHIFTState = digitalRead(SHIFTPin);
 

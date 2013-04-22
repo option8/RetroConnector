@@ -85,7 +85,7 @@ X0	31	26
 Y0	12      16
 1	33      25
 2	18      7
-3	20      22
+3	20      38
 4	3       2
 5	5       1
 6	7       0
@@ -144,7 +144,7 @@ J9 pinout
 */
 
 byte rowPins[ROWS] = { // Y0 - Y9
-  16,25,7,22,2,1,0,27}; //connect to the row pinouts of the keypad
+  16,25,7,38,2,1,0,27}; //connect to the row pinouts of the keypad
 
 byte colPins[COLS] = { // X0 - X7
   26,4,5,14,17,13,15,3,12,11 }; //connect to the column pinouts of the keypad
@@ -156,6 +156,8 @@ const int  SHIFTPin = 24;    // the pin that the shift key is attached to
 const int  CTRLPin = 23;    // the pin that the control key is attached to
 const int  APPLEPin1 = 43;    // the pin that the open-apple key is attached to
 const int  APPLEPin2 = 44;    // the pin that the closed-apple key is attached to
+
+const int CAPSPin = 21;
 // these pins are special in that they are dis/connected to ground, instead of to a row/col
 
 
@@ -180,17 +182,33 @@ void setup(){
   pinMode(APPLEPin1, INPUT);
   pinMode(APPLEPin2, INPUT);
 
-digitalWrite(APPLEPin1, HIGH);
-digitalWrite(APPLEPin2, HIGH);
-
-digitalWrite(SHIFTPin, HIGH);
-digitalWrite(CTRLPin, HIGH);
+  digitalWrite(APPLEPin1, HIGH);
+  digitalWrite(APPLEPin2, HIGH);
+  
+  digitalWrite(SHIFTPin, HIGH);
+  digitalWrite(CTRLPin, HIGH);
+  
+  pinMode(CAPSPin, INPUT);
+  digitalWrite(CAPSPin, HIGH);
+  
 
 }
 
 void loop()
 {
 
+//probably should be on an interrupt, to catch high->low transition 
+// as it is, caps lock key needs to be pressed twice
+
+char CAPSState = digitalRead(CAPSPin);
+    if (CAPSState == LOW) {
+      Keyboard.set_key6(KEY_CAPS_LOCK);
+    } else {
+      Keyboard.set_key6(0);
+    }
+
+  
+  
    char SHIFTState = digitalRead(SHIFTPin);
 
     if (SHIFTState == LOW) {
@@ -259,7 +277,7 @@ void loop()
 	Keyboard.set_key3(0);
 	Keyboard.set_key4(0);
 	Keyboard.set_key5(0);
-	Keyboard.set_key6(0);
+	//Keyboard.set_key6(0);
 
 	// Update keyboard keys to active values.
 	if( KPD.key[0].kchar && ( KPD.key[0].kstate==PRESSED || KPD.key[0].kstate==HOLD ))
@@ -277,8 +295,8 @@ void loop()
 	if( KPD.key[4].kchar && ( KPD.key[4].kstate==PRESSED || KPD.key[4].kstate==HOLD ))
 		Keyboard.set_key5( KPD.key[4].kchar );
 
-	if( KPD.key[5].kchar && ( KPD.key[5].kstate==PRESSED || KPD.key[5].kstate==HOLD ))
-		Keyboard.set_key6( KPD.key[5].kchar );
+	//if( KPD.key[5].kchar && ( KPD.key[5].kstate==PRESSED || KPD.key[5].kstate==HOLD ))
+		//Keyboard.set_key6( KPD.key[5].kchar );
 
 	Keyboard.send_now();
 	Keyboard.set_modifier(0);
