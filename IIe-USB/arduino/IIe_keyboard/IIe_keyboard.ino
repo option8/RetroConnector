@@ -126,6 +126,16 @@ const int CAPSPin = 7;
 char modifierKeys[4];
 
 
+
+
+ #define KEY_CAPS_UNLOCK  0
+
+   boolean resetCapsLock = false;  // Allows one caps unlock signal.
+   unsigned long dTime = 0;
+   char CAPSState;  // Initialize this to a reasonable value.
+
+
+
 void setup(){
 
   pinMode(SHIFTPin, INPUT);
@@ -147,24 +157,27 @@ digitalWrite(CTRLPin, HIGH);
 void loop()
 {
 //probably should be on an interrupt, to catch high->low transition 
-// as it is, caps lock key needs to be pressed twice
 
-char CAPSState = digitalRead(CAPSPin);
+   // Only do something if the pin is different from previous state.
+   if ( (CAPSState!=digitalRead(CAPSPin)) && !resetCapsLock) {
+       CAPSState = digitalRead(CAPSPin);    // Remember new CAPSState.
+       Keyboard.set_key6(KEY_CAPS_LOCK);    // Send KEY_CAPS_LOCK.
+       dTime = millis();                    // Reset delay timer.
+       resetCapsLock = true;
+   }
+   if ( resetCapsLock && (millis()-dTime) > 10)  {
+       Keyboard.set_key6(KEY_CAPS_UNLOCK);
+       resetCapsLock = false;
+   }
+
+/*char CAPSState = digitalRead(CAPSPin);
     if (CAPSState == LOW) {
       Keyboard.set_key6(KEY_CAPS_LOCK);
     } else {
       Keyboard.set_key6(0);
     }
 
-   char SHIFTState = digitalRead(SHIFTPin);
-
-    if (SHIFTState == LOW) {
-      modifierKeys[0] = MODIFIERKEY_SHIFT;
-      digitalWrite(SHIFTPin, HIGH);
-    } else {
-      digitalWrite(SHIFTPin, HIGH);
-      modifierKeys[0] = 0;
-    }
+  */
 
    char CTRLState = digitalRead(CTRLPin);
 
@@ -232,7 +245,7 @@ char CAPSState = digitalRead(CAPSPin);
 	Keyboard.set_key3(0);
 	Keyboard.set_key4(0);
 	Keyboard.set_key5(0);
-	Keyboard.set_key6(0);
+	//Keyboard.set_key6(0);
 
 	// Update keyboard keys to active values.
 	if( KPD.key[0].kchar && ( KPD.key[0].kstate==PRESSED || KPD.key[0].kstate==HOLD ))
@@ -250,8 +263,8 @@ char CAPSState = digitalRead(CAPSPin);
 	if( KPD.key[4].kchar && ( KPD.key[4].kstate==PRESSED || KPD.key[4].kstate==HOLD ))
 		Keyboard.set_key5( KPD.key[4].kchar );
 
-	if( KPD.key[5].kchar && ( KPD.key[5].kstate==PRESSED || KPD.key[5].kstate==HOLD ))
-		Keyboard.set_key6( KPD.key[5].kchar );
+	//if( KPD.key[5].kchar && ( KPD.key[5].kstate==PRESSED || KPD.key[5].kstate==HOLD ))
+	//	Keyboard.set_key6( KPD.key[5].kchar );
 
 	Keyboard.send_now();
 	Keyboard.set_modifier(0);

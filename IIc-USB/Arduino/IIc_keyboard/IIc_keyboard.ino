@@ -175,6 +175,17 @@ must be on analog pin.
 char modifierKeys[4];
 
 
+
+
+
+ #define KEY_CAPS_UNLOCK  0
+
+   boolean resetCapsLock = false;  // Allows one caps unlock signal.
+   unsigned long dTime = 0;
+   char CAPSState;  // Initialize this to a reasonable value.
+
+
+
 void setup(){
 
   pinMode(SHIFTPin, INPUT);
@@ -198,16 +209,27 @@ void loop()
 {
 
 //probably should be on an interrupt, to catch high->low transition 
-// as it is, caps lock key needs to be pressed twice
 
-char CAPSState = digitalRead(CAPSPin);
+   // Only do something if the pin is different from previous state.
+   if ( (CAPSState!=digitalRead(CAPSPin)) && !resetCapsLock) {
+       CAPSState = digitalRead(CAPSPin);    // Remember new CAPSState.
+       Keyboard.set_key6(KEY_CAPS_LOCK);    // Send KEY_CAPS_LOCK.
+       dTime = millis();                    // Reset delay timer.
+       resetCapsLock = true;
+   }
+   if ( resetCapsLock && (millis()-dTime) > 10)  {
+       Keyboard.set_key6(KEY_CAPS_UNLOCK);
+       resetCapsLock = false;
+   }
+
+/*char CAPSState = digitalRead(CAPSPin);
     if (CAPSState == LOW) {
       Keyboard.set_key6(KEY_CAPS_LOCK);
     } else {
       Keyboard.set_key6(0);
     }
 
-  
+  */
   
    char SHIFTState = digitalRead(SHIFTPin);
 
