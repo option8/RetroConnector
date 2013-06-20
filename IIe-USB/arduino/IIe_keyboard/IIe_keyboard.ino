@@ -48,7 +48,6 @@ char keys[ROWS][COLS] = {
 
 
 
-
 /*
         XO      X1      X2      X3  |   X4      X5      X6      X7
 ------------------------------------+--------------------------------
@@ -178,6 +177,15 @@ void loop()
     }
 
   */
+   char SHIFTState = digitalRead(SHIFTPin);
+
+    if (SHIFTState == LOW) {
+      modifierKeys[0] = MODIFIERKEY_SHIFT;
+      digitalWrite(SHIFTPin, HIGH);
+    } else {
+      digitalWrite(SHIFTPin, HIGH);
+      modifierKeys[0] = 0;
+    }
 
    char CTRLState = digitalRead(CTRLPin);
 
