@@ -210,7 +210,17 @@ void loop()
 
 //probably should be on an interrupt, to catch high->low transition 
 
-   // Only do something if the pin is different from previous state.
+   CAPSState = digitalRead(CAPSPin);
+   if ((int(keyboard_leds) & 2) == CAPSState) {
+       if (CAPSState == HIGH) {
+           Keyboard.set_key6(KEY_CAPS_UNLOCK);
+       }
+       else {
+           Keyboard.set_key6(KEY_CAPS_LOCK);
+       }
+   }
+   
+   /* // Only do something if the pin is different from previous state.
    if ( (CAPSState!=digitalRead(CAPSPin)) && !resetCapsLock) {
        CAPSState = digitalRead(CAPSPin);    // Remember new CAPSState.
        Keyboard.set_key6(KEY_CAPS_LOCK);    // Send KEY_CAPS_LOCK.
@@ -220,7 +230,7 @@ void loop()
    if ( resetCapsLock && (millis()-dTime) > 10)  {
        Keyboard.set_key6(KEY_CAPS_UNLOCK);
        resetCapsLock = false;
-   }
+   } */
 
 /*char CAPSState = digitalRead(CAPSPin);
     if (CAPSState == LOW) {
