@@ -1,8 +1,12 @@
 /*
 
+requirements:
+circuits@home code library
+https://github.com/felis/USB_Host_Shield_2.0/archive/master.zip
+
+
 TO DO:
   caps lock key
-  map reset key for ctrl-apple-reset
 
 */
 
@@ -144,6 +148,8 @@ CTL = AVR A1 / 15
   int c3;
   
   int count= 0;
+  
+  int CAPS_LOCK_ACTIVE = 0;
 
 
 const int COLUMNS = 8;
@@ -405,14 +411,14 @@ void KbdRptParser::PrintKey(uint8_t m, uint8_t key)
 
 // needs to send APPLE keys as key presses, not just as modifiers. 
 
-  if((mod.bmLeftAlt  == 1) || (mod.bmLeftGUI  == 1) ) {
+  if(mod.bmLeftAlt  == 1) {
       digitalWrite(OPEN_APPLE_PIN, HIGH);
   } else {
       digitalWrite(OPEN_APPLE_PIN, LOW);
   }
 
 
-  if((mod.bmRightAlt  == 1) || (mod.bmRightGUI  == 1) ) {
+  if(mod.bmRightAlt  == 1) {
       digitalWrite(CLOSED_APPLE_PIN, HIGH);
   } else {
       digitalWrite(CLOSED_APPLE_PIN, LOW);
@@ -499,6 +505,30 @@ Serial.print( "SEARCH_ROW = " );
 // enable the common IO
   digitalWrite(ENABLE_PIN, LOW);
 
+
+
+// defines F12 as "RESET"
+   if(key  == 69) {  // 0x45 == 69 == key_F12
+      digitalWrite(RESET_PIN, LOW);
+    }
+ // so... control open-apple reset = control alt F12 
+
+// and if that works, then this should do CAPS LOCK:
+   if(key  == 57) {  // 0x39 == 57 == key_CAPS_LOCK
+   // modern caps keys are not locking... usually.
+   
+       if(CAPS_LOCK_ACTIVE == 0) {
+          digitalWrite(CAPS_LOCK_PIN, LOW);
+          CAPS_LOCK_ACTIVE = 1;
+       } else {
+          digitalWrite(CAPS_LOCK_PIN, HIGH);
+          CAPS_LOCK_ACTIVE = 0;
+       }
+         
+    }
+
+     
+     
      
      
         
@@ -512,6 +542,14 @@ void KbdRptParser::OnKeyUp(uint8_t mod, uint8_t key)
 
 //    Serial.print("UP ");
     PrintKey(mod, key);
+    
+    
+// defines F12 as "RESET"
+   if(key  == 69) {  // 0x45 == 69 == key_F12
+      digitalWrite(RESET_PIN, HIGH);
+  } //release RESET on KEYUP
+// so... control open-apple reset = control alt F12 
+    
 }
 
 void KbdRptParser::OnKeyPressed(uint8_t key)	
