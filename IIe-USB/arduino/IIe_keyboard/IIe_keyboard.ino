@@ -138,7 +138,8 @@ char modifierKeys[4];
    boolean resetCapsLock = false;  // Allows one caps unlock signal.
    unsigned long dTime = 0;
    char CAPSState;  // Initialize this to a reasonable value.
-
+   
+   boolean FKEYS = false; // used to set numbers to F-Key equivalent. currently tied to caps lock
 
 
 void setup(){
@@ -158,6 +159,11 @@ void setup(){
   digitalWrite(CAPSPin, HIGH);
   
  
+ 
+// DEBUG
+
+  Serial.begin(115200);
+ 
 }
 
 void loop()
@@ -170,17 +176,21 @@ void loop()
        Keyboard.set_key6(KEY_CAPS_LOCK);    // Send KEY_CAPS_LOCK.
        dTime = millis();                    // Reset delay timer.
        resetCapsLock = true;
+       
    }
    if ( resetCapsLock && (millis()-dTime) > 10)  {
        Keyboard.set_key6(KEY_CAPS_UNLOCK);
        resetCapsLock = false;
-   }
+  }
+
+FKEYS = CAPSState;
+
 
 /*char CAPSState = digitalRead(CAPSPin);
     if (CAPSState == LOW) {
       Keyboard.set_key6(KEY_CAPS_LOCK);
     } else {
-      Keyboard.set_key6(0);
+      Keyboard.set_key6(0);89
     }
 
   */
@@ -254,6 +264,10 @@ void loop()
 
     KPD.getKeys(); // Scan for all pressed keys. 6 Max, + 4 modifiers. Should be plenty, but can be extended to 10+
 
+
+
+
+
 	// Set keyboard keys to default values.
 	Keyboard.set_key1(0);
 	Keyboard.set_key2(0);
@@ -262,9 +276,37 @@ void loop()
 	Keyboard.set_key5(0);
 	//Keyboard.set_key6(0);
 
+
+        
+        /* based on suggestion from Craig Brooks <s.craig.brooks@gmail.com>
+        uses CAPS LOCK to turn number keys into F-Key equivalent.
+        */
+        
+
+
+
 	// Update keyboard keys to active values.
-	if( KPD.key[0].kchar && ( KPD.key[0].kstate==PRESSED || KPD.key[0].kstate==HOLD ))
-		Keyboard.set_key1( KPD.key[0].kchar );
+	if( KPD.key[0].kchar && ( KPD.key[0].kstate==PRESSED || KPD.key[0].kstate==HOLD )) {
+
+            Serial.println(FKEYS);
+        
+        
+                if (FKEYS) {
+                  if((KPD.key[0].kchar >= 0x1E) &&  (KPD.key[0].kchar <= 0x27)){
+                    KPD.key[0].kchar += 0x1C;
+
+                    Serial.println( KPD.key[0].kchar, HEX );
+
+                  }
+                  
+
+                  
+                }
+  
+      		Keyboard.set_key1( KPD.key[0].kchar );
+
+  
+        }
 
 	if( KPD.key[1].kchar && ( KPD.key[1].kstate==PRESSED || KPD.key[1].kstate==HOLD ))
 		Keyboard.set_key2( KPD.key[1].kchar );
