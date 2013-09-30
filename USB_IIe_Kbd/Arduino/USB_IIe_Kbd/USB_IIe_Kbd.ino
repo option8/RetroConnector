@@ -743,7 +743,7 @@ void KbdRptParser::OnKeyPressed(uint8_t key)
 };
 
 USB     Usb;
-//USBHub     Hub(&Usb);
+USBHub     Hub(&Usb);
 HIDBoot<HID_PROTOCOL_KEYBOARD>    Keyboard(&Usb);
 
 uint32_t next_time;
@@ -793,7 +793,7 @@ digitalWrite(CONTROL_PIN, HIGH);
 
  // *** DEBUG 
 // Serial.begin( 115200 );
-    Serial.println("Start");
+//    Serial.println("Start");
 
     if (Usb.Init() == -1)
         Serial.println("OSC did not start.");
