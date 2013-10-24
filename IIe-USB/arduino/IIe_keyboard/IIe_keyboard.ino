@@ -162,7 +162,7 @@ void setup(){
  
 // DEBUG
 
-  Serial.begin(115200);
+//  Serial.begin(115200);
  
 }
 
@@ -288,14 +288,14 @@ FKEYS = CAPSState;
 	// Update keyboard keys to active values.
 	if( KPD.key[0].kchar && ( KPD.key[0].kstate==PRESSED || KPD.key[0].kstate==HOLD )) {
 
-            Serial.println(FKEYS);
+            //Serial.println(FKEYS);
         
         
                 if (FKEYS) {
                   if((KPD.key[0].kchar >= 0x1E) &&  (KPD.key[0].kchar <= 0x27)){
                     KPD.key[0].kchar += 0x1C;
 
-                    Serial.println( KPD.key[0].kchar, HEX );
+                 //   Serial.println( KPD.key[0].kchar, HEX );
 
                   }
                   

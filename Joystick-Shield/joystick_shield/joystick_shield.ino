@@ -148,7 +148,7 @@ int CalibrationMax = 800; // allows for weird "jumpy" joystick potentiometers. t
     Serial.print(" -- ");
   Serial.print(digitalRead(Button1Pin));
    Serial.println();
-*/
-//    delay(100);
 
+    delay(100);
+*/
 }
