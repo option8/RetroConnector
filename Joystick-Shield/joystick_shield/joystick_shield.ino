@@ -47,7 +47,17 @@ int YMax = 0;
 int XMin = 1023;
 int YMin = 1023;
 
+
+/*
+
+adjust CalibrationMax up if the range on your joystick is too restricted to calibrate
+
+adjust down if your joystick "jumps" around a lot. 800 seems to be a pretty good spot for the sticks i've tested.
+
+*/
 int CalibrationMax = 800; // allows for weird "jumpy" joystick potentiometers. these things are 30 years old, after all.
+
+
 
 
  void setup() {

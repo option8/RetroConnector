@@ -36,8 +36,8 @@ public:
 uint8_t X;
 uint8_t Y;
 
-uint8_t Butt0;
-uint8_t Butt1;
+boolean Butt0;
+boolean Butt1;
 
 };
 
