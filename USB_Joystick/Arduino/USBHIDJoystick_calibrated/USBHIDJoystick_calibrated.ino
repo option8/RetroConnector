@@ -4,7 +4,9 @@
 
 // set pin 4 as the slave select for the digital pot:
 const int slaveSelectPin = A0;  //4;
-const float foo = .21;
+//const float foo = .21;
+const int TrimPin = A3;
+
 const int Butt0Pin = A4;
 const int Butt1Pin = A5;
 
@@ -69,6 +71,9 @@ void setup()
 void loop()
 {
     Usb.Task();
+
+    float foo = float(analogRead(TrimPin))/1023.000;
+
     
     int joyX = JoyEvents.X;
     int channel = 5;
