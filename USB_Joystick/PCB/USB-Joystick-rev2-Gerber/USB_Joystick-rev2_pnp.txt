@@ -1,0 +1,35 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=USB_Joystick-rev2
+*Date=13:30:18
+*CreatedBy=Fritzing 0.8.3b.07.27.048f
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;;52.0598;-13.9362;0;Bottom;TXT2
+2;;;38.7724;-29.8808;0;Bottom;TXT2
+3;;;10.9338;-6.8049;0;Bottom;TXT2
+4;;;51.4125;-17.0942;0;Bottom;TXT1
+5;;THT;18.4839;-38.759;0;Bottom;5v
+6;;;67.0161;-40.4144;0;Bottom;IMG1
+7;;DIP28 [THT];55.3139;-5.73904;90;Bottom;AD5206
+8;;3362u-2;66.8455;-33.679;90;Bottom;TRIM
+9;;THT;18.5739;-4.46894;180;Bottom;XTAL
+10;;;41.3263;-4.4474;0;Bottom;Via6
+11;;DIP (Dual Inline) [THT];13.4039;-23.519;0;Bottom;UHS Mini
+12;;DIP (Dual Inline) [THT];50.2339;-33.679;-90;Bottom;GAME
+13;5V;TO220 [THT];7.05386;-2.94504;180;Bottom;3v
+14;;;38.7582;-7.03585;0;Bottom;Via3
+15;;;66.9636;-13.7518;0;Bottom;TXT3
+16;;;37.5338;-19.7091;0;Bottom;Via2
+17;;;51.5039;-14.629;0;Bottom;Via1
+18;1µF;100 mil [THT, electrolytic];66.7439;-22.249;180;Bottom;C1
+19;;;6.76246;-6.89437;0;Bottom;TXT1
+20;;dip;31.1839;-20.979;0;Bottom;ATMEGA328
