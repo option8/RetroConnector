@@ -533,7 +533,7 @@ void KbdRptParser::PrintLine()
 {
   
   int CharDelay = 50;
-  String TestWord = "10 print pdl(0) ' ' pdl(1) ' ' peek(-16287) ' ' peek(-16286)"; //{97,98,67,68}; //abCD
+  String TestWord = "10 print pdl(0) \" \" pdl(1) \" \" peek(-16287) \" \" peek(-16286)"; //{97,98,67,68}; //abCD
   char SHIFTDOWN = 0;
   
 // break up word into array of characters

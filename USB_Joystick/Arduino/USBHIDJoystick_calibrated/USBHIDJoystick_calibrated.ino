@@ -78,13 +78,13 @@ void loop()
     int joyX = JoyEvents.X;
     int channel = 5;
 
-      digitalPotWrite(channel, joyX);
+      digitalPotWrite(channel, joyX * foo);
       digitalPotWrite(channel - 1, joyX * foo);
 
     int joyY = JoyEvents.Y;
      channel = 3;
 
-      digitalPotWrite(channel, joyY);
+      digitalPotWrite(channel, joyY * foo);
       digitalPotWrite(channel - 1, joyY * foo);
 
 
