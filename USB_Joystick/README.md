@@ -19,7 +19,7 @@ Calibration
 
 This BASIC program is helpful in calibrating the RetroConnector Joystick Interface board. Type this in at the BASIC prompt on your Apple II:
     
-    10 print pdl(0) " " pdl(1) " " peek(-16287) " " peek(-16286)
+    10 print pdl(0) " " pdl(1)
 	20 goto 10
 	
 Then type *RUN* and hit enter.
@@ -28,3 +28,9 @@ While the resulting numbers scroll down the screen, use a small screwdriver to a
 
 Most Apple II programs allow for a certain "dead zone" in the middle of the joystick values, so it's not necessary to be precisely 127 at center.
 
+To test buttons along with joystick calibration, the above program can be adjusted so:
+
+    10 print pdl(0) " " pdl(1) " " peek(-16287) " " peek(-16286)
+	20 goto 10
+
+The last two values are button 1 and 2. When pressed, they should be *above* 127, when released, *below* 127.
