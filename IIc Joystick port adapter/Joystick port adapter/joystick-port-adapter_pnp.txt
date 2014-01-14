@@ -1,0 +1,22 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=joystick-port-adapter
+*Date=16:27:58
+*CreatedBy=Fritzing 0.8.5b.12.16.8b2c
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;;8.22376;-5.48918;0;Bottom;TXT1
+2;;;27.1408;-19.5816;0;Bottom;TXT1
+3;;;15.7881;-8.87223;0;Bottom;TXT1
+4;;DIP (Dual Inline) [THT];15.6591;-15.9068;90;Bottom;GAME
+5;;;22.1808;-2.55621;0;Bottom;TXT1
+6;;db9;15.8891;-4.45684;180;Bottom;X1
+7;;;30.4113;-18.1623;-90;Bottom;TXT3

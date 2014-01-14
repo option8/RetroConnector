@@ -22,26 +22,26 @@ const byte ROWS = 10; // rows
 const byte COLS = 8; // columns
 char keys[ROWS][COLS] = {
 
-
-{      KEY_ESC,     KEY_TAB,     KEY_A,       KEY_Z,  KEYPAD_SLASH , 0 ,  KEYPAD_ASTERIX,  KEY_ESC},
-
-{      KEY_1,      KEY_Q,       KEY_D,       KEY_X,  0,  0,  0,  0},
-
-{      KEY_2,      KEY_W,       KEY_S,       KEY_C,  KEYPAD_0,  KEYPAD_4,  KEYPAD_8,  0},
-
-{      KEY_3,      KEY_E,       KEY_H,       KEY_V,  KEYPAD_1,  KEYPAD_5,  KEYPAD_9,  KEYPAD_MINUS},
-
-{      KEY_4,      KEY_R,       KEY_F,       KEY_B,  KEYPAD_2,  KEYPAD_6,  KEYPAD_PERIOD,  KEYPAD_ENTER},
-
-{      KEY_6,      KEY_Y,       KEY_G,       KEY_N,  KEYPAD_3,  KEYPAD_7,  KEYPAD_PLUS,  0},
-
-{      KEY_5,      KEY_T,       KEY_J,       KEY_M,       KEY_BACKSLASH,     KEY_TILDE,      KEY_ENTER,  KEY_BACKSPACE},
-
-{      KEY_7,      KEY_U,       KEY_K,       KEY_COMMA,      KEY_EQUAL,       KEY_P,      KEY_UP,       KEY_DOWN },
-
-{      KEY_8,      KEY_I,       KEY_SEMICOLON,      KEY_PERIOD,      KEY_0,       KEY_LEFT_BRACE,     KEY_SPACE,   KEY_LEFT },
-
-{      KEY_9,      KEY_O,       KEY_L,       KEY_SLASH,      KEY_MINUS,      KEY_RIGHT_BRACE,      KEY_QUOTE,      KEY_RIGHT },
+  
+  {      KEY_ESC,     KEY_TAB,     KEY_A,       KEY_Z,  KEYPAD_SLASH , 0 ,  KEYPAD_ASTERIX,  KEY_ESC},
+  
+  {      KEY_1,      KEY_Q,       KEY_D,       KEY_X,  0,  0,  0,  0},
+  
+  {      KEY_2,      KEY_W,       KEY_S,       KEY_C,  KEYPAD_0,  KEYPAD_4,  KEYPAD_8,  0},
+  
+  {      KEY_3,      KEY_E,       KEY_H,       KEY_V,  KEYPAD_1,  KEYPAD_5,  KEYPAD_9,  KEYPAD_MINUS},
+  
+  {      KEY_4,      KEY_R,       KEY_F,       KEY_B,  KEYPAD_2,  KEYPAD_6,  KEYPAD_PERIOD,  KEYPAD_ENTER},
+  
+  {      KEY_6,      KEY_Y,       KEY_G,       KEY_N,  KEYPAD_3,  KEYPAD_7,  KEYPAD_PLUS,  0},
+  
+  {      KEY_5,      KEY_T,       KEY_J,       KEY_M,       KEY_BACKSLASH,     KEY_TILDE,      KEY_ENTER,  KEY_BACKSPACE},
+  
+  {      KEY_7,      KEY_U,       KEY_K,       KEY_COMMA,      KEY_EQUAL,       KEY_P,      KEY_UP,       KEY_DOWN },
+  
+  {      KEY_8,      KEY_I,       KEY_SEMICOLON,      KEY_PERIOD,      KEY_0,       KEY_LEFT_BRACE,     KEY_SPACE,   KEY_LEFT },
+  
+  {      KEY_9,      KEY_O,       KEY_L,       KEY_SLASH,      KEY_MINUS,      KEY_RIGHT_BRACE,      KEY_QUOTE,      KEY_RIGHT },
 
 };
 
