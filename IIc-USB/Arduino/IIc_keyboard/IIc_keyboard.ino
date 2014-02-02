@@ -10,11 +10,7 @@ http://www.pjrc.com/teensy/teensyduino.html
 
 
 /* 
-Declares the matrix rows/cols of the Apple IIe keyboard. 
-
-More information here:
-http://apple2.info/wiki/index.php?title=Pinouts#Apple_.2F.2Fe_Motherboard_keyboard_connector
-
+Declares the matrix rows/cols of the Apple IIc keyboard. 
 
 */
 

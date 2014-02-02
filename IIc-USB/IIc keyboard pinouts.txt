@@ -80,7 +80,7 @@ J9 pinout
 20	Y3
 21		GROUND ???
 22	X2
-23		GROUND ???
+23		5V ???
 24	X1
 25	POWER LED (5v)
 26	OPEN APPLE
