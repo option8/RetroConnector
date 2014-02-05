@@ -1,5 +1,9 @@
-_Tested with generic USB gamepad:_
-http://www.amazon.com/gp/product/B002NQ4820
+_Tested and works with the following USB gamepads:_
+- PS3-style generic http://www.amazon.com/gp/product/B002NQ4820 
+- Super Nintendo generic http://www.amazon.com/gp/product/B002JAU20W
+
+_Will NOT work with the following:_
+- PS3 Sixaxis Dualshock. The Dualshock draws too much power (300mA), since it charges the battery over USB.
 
 
 Plug and Play
