@@ -2,11 +2,9 @@
 
 #include <SPI.h>
 
-// set pin 4 as the slave select for the digital pot:
-const int slaveSelectPin = A0;  //4;
-//const float foo = .21;
+// set pin A0 as the slave select for the digital pot:
+const int slaveSelectPin = A0;
 const int TrimPin = A3;
-
 const int Butt0Pin = A4;
 const int Butt1Pin = A5;
 
@@ -41,16 +39,11 @@ void setup()
 {
   // set the slaveSelectPin as an output:
   pinMode (slaveSelectPin, OUTPUT);
-  
-
   pinMode (Butt0Pin, OUTPUT);
   pinMode (Butt1Pin, OUTPUT);
 
-  
   // initialize SPI:
   SPI.begin(); 
-
-
 
   Serial.begin( 115200 );
   Serial.println("Start");
@@ -63,40 +56,35 @@ void setup()
   if (!Hid.SetReportParser(0, &Joy))
       ErrorMessage<uint8_t>(PSTR("SetReportParser"), 1  ); 
 
-
-
-
 }
 
 void loop()
 {
     Usb.Task();
+    int channelX = 5;
+    int channelY = 3;
 
-    float foo = float(analogRead(TrimPin))/1023.000;
+    float calibrate = float(analogRead(TrimPin))/1023.000;
 
-    
+    // need to determine if x or x2 is giving values
     int joyX = JoyEvents.X;
-    int channel = 5;
-
-      digitalPotWrite(channel, joyX * foo);
-      digitalPotWrite(channel - 1, joyX * foo);
-
+    
+    // need to determine if y or y2 is giving values
     int joyY = JoyEvents.Y;
-     channel = 3;
+ 
+ 
+    // write the values to the POTs
+      digitalPotWrite(channelX, joyX * calibrate);
+      digitalPotWrite(channelX - 1, joyX * calibrate);
 
-      digitalPotWrite(channel, joyY * foo);
-      digitalPotWrite(channel - 1, joyY * foo);
+      digitalPotWrite(channelY, joyY * calibrate);
+      digitalPotWrite(channelY - 1, joyY * calibrate);
 
-
+    // write the buttons
     digitalWrite(Butt0Pin,JoyEvents.Butt0);
     digitalWrite(Butt1Pin,JoyEvents.Butt1);
-    
-    
-
 
 }
-
-
 
 void digitalPotWrite(int address, int value) {
   // take the SS pin low to select the chip:

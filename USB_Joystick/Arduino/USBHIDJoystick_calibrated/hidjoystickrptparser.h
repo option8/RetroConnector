@@ -23,7 +23,7 @@
 
 struct GamePadEventData
 {
-	uint8_t X, Y;
+	uint8_t axis0, axis1, axis2, axis3, axis4; // read first 5 axes
 };
 
 class JoystickEvents
@@ -35,6 +35,18 @@ public:
 
 uint8_t X;
 uint8_t Y;
+
+int axes[5];
+int axesMin[5];
+int axesMax[5];
+int axesDelta[5];
+
+int activeX;
+int activeY;
+//arrays of min and max values
+// var with which axis is X/Y
+
+boolean initialized;
 
 boolean Butt0;
 boolean Butt1;
@@ -48,7 +60,6 @@ class JoystickReportParser : public HIDReportParser
 	JoystickEvents		*joyEvents;
 
 	uint8_t				oldPad[RPT_GEMEPAD_LEN];
-	uint8_t				oldHat;
 	uint16_t			oldButtons;
 
 public:
