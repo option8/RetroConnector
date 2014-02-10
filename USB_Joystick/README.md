@@ -1,9 +1,16 @@
+Compatible Joysticks and Gamepads
+=============
+
+Cheap, generic gamepads seem to work best, since they do not use the USB connection to charge a battery or drive rumble motors. If you have successfully (or unsuccessfully) used a pad not on this list, please contact me and I will add it to this list.
+
 _Tested and works with the following USB gamepads:_
 - PS3-style generic http://www.amazon.com/gp/product/B002NQ4820 
-- Super Nintendo generic http://www.amazon.com/gp/product/B002JAU20W
+- Super Nintendo generic http://www.amazon.com/gp/product/B002JAU20W (with latest firmware)
+- MadCatz USB Gamepad http://www.gameseek.co.uk/pd/pcnt7swcqmtyh46ktq/pc-madcatz-pc-gamepad-pro-400-series--usb-controller-pc-+-mac-
 
 _Will NOT work with the following:_
 - PS3 Sixaxis (Dualshock or Original flavor). The PS3 wireless controllers draw too much power, since they charge the battery over USB.
+- XBox 360 wired controller.
 
 
 Plug and Play
