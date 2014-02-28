@@ -126,7 +126,7 @@ void JoystickEvents::OnButtonUp(uint8_t but_id)
 	Serial.print("Up: ");
 	Serial.println(but_id);
       if(but_id % 2 == 0) { // all even numbered buttons = button 0
-        Butt0 = false;
+        Butt0 =  false;
       }
 
       if(but_id % 2 == 1) { // all odd buttons = button 1

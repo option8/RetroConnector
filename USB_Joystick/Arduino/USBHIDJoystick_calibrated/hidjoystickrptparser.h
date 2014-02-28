@@ -48,8 +48,8 @@ int activeY;
 
 boolean initialized;
 
-boolean Butt0;
-boolean Butt1;
+int Butt0;
+int Butt1;
 
 };
 

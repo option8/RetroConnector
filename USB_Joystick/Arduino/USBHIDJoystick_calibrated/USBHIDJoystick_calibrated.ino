@@ -39,6 +39,7 @@ void setup()
 {
   // set the slaveSelectPin as an output:
   pinMode (slaveSelectPin, OUTPUT);
+
   pinMode (Butt0Pin, OUTPUT);
   pinMode (Butt1Pin, OUTPUT);
 
@@ -63,6 +64,7 @@ void loop()
     Usb.Task();
     int channelX = 5;
     int channelY = 3;
+    
 
     float calibrate = float(analogRead(TrimPin))/1023.000;
 
@@ -80,9 +82,13 @@ void loop()
       digitalPotWrite(channelY, joyY * calibrate);
       digitalPotWrite(channelY - 1, joyY * calibrate);
 
+
     // write the buttons
-    digitalWrite(Butt0Pin,JoyEvents.Butt0);
-    digitalWrite(Butt1Pin,JoyEvents.Butt1);
+   digitalWrite(Butt0Pin,JoyEvents.Butt0);
+   digitalWrite(Butt1Pin,JoyEvents.Butt1);
+
+
+
 
 }
 
