@@ -1,5 +1,3 @@
-
-
 #include <SPI.h>
 
 // set pin A0 as the slave select for the digital pot:

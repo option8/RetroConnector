@@ -162,8 +162,9 @@ void setup(){
  
 // DEBUG
 
-//  Serial.begin(115200);
- 
+ //Serial.begin(115200);
+ //Serial.println(CAPSState);
+
 }
 
 void loop()
@@ -177,13 +178,16 @@ void loop()
        dTime = millis();                    // Reset delay timer.
        resetCapsLock = true;
        
+       Serial.print("Caps = ");
+       Serial.println(CAPSState);
+       
    }
    if ( resetCapsLock && (millis()-dTime) > 10)  {
        Keyboard.set_key6(KEY_CAPS_UNLOCK);
        resetCapsLock = false;
   }
 
-FKEYS = CAPSState;
+FKEYS = !CAPSState;
 
 
 /*char CAPSState = digitalRead(CAPSPin);
@@ -292,14 +296,17 @@ FKEYS = CAPSState;
         
         
                 if (FKEYS) {
+                  // number keys 1 through 0 for f1 - f10
                   if((KPD.key[0].kchar >= 0x1E) &&  (KPD.key[0].kchar <= 0x27)){
                     KPD.key[0].kchar += 0x1C;
 
                  //   Serial.println( KPD.key[0].kchar, HEX );
 
+                  // - and = for f11 and f12
+                  } else if( KPD.key[0].kchar == 0x2D || KPD.key[0].kchar == 0x2E ) {
+                    KPD.key[0].kchar += 0x17;
                   }
                   
-
                   
                 }
   

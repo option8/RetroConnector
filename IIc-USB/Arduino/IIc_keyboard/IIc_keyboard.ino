@@ -7,6 +7,12 @@ http://www.pjrc.com/teensy/teensyduino.html
 
 #include <Keypad.h>
 
+// added breakout pins for DISK READ LED, KEYBOARD SWITCH, and 40/80 COLUMN SWITCH (rev.4 board)
+int LEDPin = 8;
+int DvorakPin = 9;
+int ColumnsPin = 10;
+
+
 
 
 /* 
@@ -199,6 +205,8 @@ void setup(){
   pinMode(CAPSPin, INPUT);
   digitalWrite(CAPSPin, HIGH);
   
+  // Turn on the DISK READ LED (rev4 board)
+ // digitalWrite(LEDPin, HIGH);  
 
 }
 
@@ -219,7 +227,7 @@ void loop()
        resetCapsLock = false;
    }
 
-FKEYS = CAPSState;
+FKEYS = !CAPSState;
 
 
 /*char CAPSState = digitalRead(CAPSPin);
@@ -312,14 +320,17 @@ FKEYS = CAPSState;
         
         
                 if (FKEYS) {
+                  // number keys 1 through 0 for f1 - f10
                   if((KPD.key[0].kchar >= 0x1E) &&  (KPD.key[0].kchar <= 0x27)){
                     KPD.key[0].kchar += 0x1C;
 
                  //   Serial.println( KPD.key[0].kchar, HEX );
 
+                  // - and = for f11 and f12
+                  } else if( KPD.key[0].kchar == 0x2D || KPD.key[0].kchar == 0x2E ) {
+                    KPD.key[0].kchar += 0x17;
                   }
                   
-
                   
                 }
   

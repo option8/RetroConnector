@@ -558,12 +558,14 @@ protected:
 };
 
 
-char* macrostrings[4]= {
+char* macrostrings[5]= {
   "CALL -151\n", 
   "8:20 35 FD 20 ED FD 4C 8 0 8G               WeaknessPoint Minus by Martin Haye\n",
+  "2000:20 35 FD C9 95 D0 2 B1\n :28 C9 94 D0 9 98 69 3\n :29 FC 85 24 D0 EA C9 8E\n :D0 8 A5 32 49 C0 85 32\n :D0 DE 20 ED FD 18 90 D8 \n",
   "5 rem Joystick Calibration \n10 print pdl(0) \" \" pdl(1) \" \" peek(-16287) \" \" peek(-16286) : goto 10\n    run\n",
-  "2000:20 35 FD C9 95 D0 2 B1\n :28 C9 94 D0 9 98 69 3\n :29 FC 85 24 D0 EA C9 8E\n :D0 8 A5 32 49 C0 85 32\n :D0 DE 20 ED FD 18 90 D8 \n"
+  "gr : for i=0 to 39 : color=i-(int(i/16)*16) : vlin 0,39 at i : next \n"
 };
+// graphics test by Dagen Brock
 
 
 void KbdRptParser::PrintLine(int macro)	
@@ -573,7 +575,7 @@ void KbdRptParser::PrintLine(int macro)
   
   //10 print pdl(0) " " pdl(1) " " peek(-16287) " " peek(-16286) : goto 10
   
-  String TestWord = macrostrings[macro];
+  String MacroString = macrostrings[macro];
   char SHIFTDOWN = 0;
    
 // break up word into array of characters
@@ -584,20 +586,20 @@ void KbdRptParser::PrintLine(int macro)
 
 // send keydown, wait X miliseconds, send keyup
 
-  for(int letters=0; letters < TestWord.length(); letters++ ) {
-//    Serial.print(KEYMAP[TestWord[letters]][0]); // look up the USB byte from the KEYMAP array. 
+  for(int letters=0; letters < MacroString.length(); letters++ ) {
+//    Serial.print(KEYMAP[MacroString[letters]][0]); // look up the USB byte from the KEYMAP array. 
     
-    if(KEYMAP[TestWord[letters]][1] == 1) {
+    if(KEYMAP[MacroString[letters]][1] == 1) {
 //     Serial.print("!"); // hold shift
      SHIFTDOWN = 2;
     } else {
      SHIFTDOWN = 0;
     }
     
-    OnKeyDown(SHIFTDOWN,KEYMAP[TestWord[letters]][0]);
+    OnKeyDown(SHIFTDOWN,KEYMAP[MacroString[letters]][0]);
     
     delay(CharDelay);
-    OnKeyUp(SHIFTDOWN,KEYMAP[TestWord[letters]][0]);
+    OnKeyUp(SHIFTDOWN,KEYMAP[MacroString[letters]][0]);
   }
 
 
@@ -764,6 +766,10 @@ Serial.print( "SEARCH_ROW = " );
      
    if(key  == 61) {  // == key_F4
       PrintLine(3); 
+   }
+     
+   if(key  == 62) {  // == key_F5
+      PrintLine(4); 
    }
      
         
