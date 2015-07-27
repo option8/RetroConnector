@@ -148,9 +148,9 @@ adjust down if your joystick "jumps" around a lot. 800 seems to be a pretty good
   Serial.print(JoystickY);
   Serial.print(" -- ");
   Serial.println(YMax);
-    delay(100);
-
+  delay(100);
 */
+
 
 /*
   Serial.print(JoystickX);

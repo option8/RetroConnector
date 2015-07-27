@@ -1,0 +1,32 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=M0100 USB
+*Date=17:43:14
+*CreatedBy=Fritzing 0.9.0b.06.11.da4e
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;;1.48321;-10.3455;90;Bottom;TXT2
+2;;;15.875;-2.9344;0;Bottom;Copper Fill12
+3;;;13.081;-2.909;0;Bottom;Copper Fill11
+4;;;25.5016;-19.7492;0;Bottom;Copper Fill4
+5;;;12.7762;-15.2026;0;Bottom;Copper Fill9
+6;;;24.9428;-19.7492;0;Bottom;Copper Fill8
+7;;;13.4366;-31.865;0;Bottom;Copper Fill7
+8;;;18.542;-5.8554;0;Bottom;Copper Fill5
+9;;db9;15.8694;-3.43771;180;Bottom;1
+10;;;29.5819;-23.5079;90;Bottom;TXT1
+11;;;18.9484;-3.2392;0;Bottom;Copper Fill13
+12;;;10.6172;-19.7492;0;Bottom;Copper Fill1
+13;;;11.3284;-11.3926;0;Bottom;Copper Fill10
+14;;;14.7066;-21.0954;0;Bottom;Copper Fill2
+15;;;6.1468;-19.7492;0;Bottom;Copper Fill6
+16;;;10.6426;-13.577;0;Bottom;Copper Fill3
+17;;DIP (Dual Inline) [THT];15.6056;-23.7688;0;Bottom;Teensy 2.0

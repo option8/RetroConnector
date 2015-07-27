@@ -1,0 +1,29 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=serial-keyboard-IIe
+*Date=23:48:29
+*CreatedBy=Fritzing 0.9.2b.11.19.8d2d5970658f0bed09c661c9ea9a515b5f40f44c
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;DIP (Dual Inline) [THT];19.536;-27.1078;90;Bottom;CD74HC4067
+2;;[THT];85.1848;-43.1603;-90;Bottom;CTL+RESET
+3;;THT;39.856;-4.24776;-90;Bottom;J18
+4;;;14.1849;-45.0725;0;Bottom;TXT1
+5;;;5.3368;-38.8811;0;Bottom;TXT3
+6;;THT;38.586;-10.5978;-90;Bottom;J17
+7;470;THT;5.56599;-11.8678;180;Bottom;R3
+8;;DIP (Dual Inline) [THT];72.876;-27.1078;90;Bottom;TEENSY 2.0
+9;;[THT];78.4481;-43.1606;-90;Bottom;S1
+10;;;64.7387;-10.2216;0;Bottom;TXT4
+11;;;73.4893;-42.9892;0;Bottom;IMG2
+12;;;28.0221;-41.7977;0;Bottom;TXT2
+13;;DIP (Dual Inline) [THT];46.206;-30.9178;-90;Bottom;CD4051B
+14;470;THT;5.56599;-16.2843;180;Bottom;R2

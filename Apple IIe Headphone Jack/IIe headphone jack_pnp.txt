@@ -1,0 +1,20 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=IIe headphone jack
+*Date=23:54:12
+*CreatedBy=Fritzing 0.9.2b.11.19.8d2d5970658f0bed09c661c9ea9a515b5f40f44c
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;THT;3.42138;-6.85543;0;Bottom;J20
+2;;THT;16.2484;-13.8404;-90;Bottom;TO SPEAKER
+3;;THT;17.1114;-6.89974;0;Bottom;J19
+4;;THT;9.89838;-1.77543;-90;Bottom;J18
+5;;THT;5.8959;-12.1056;0;Bottom;J21
