@@ -50,9 +50,8 @@ PIXELS = []
 try:
     byte = DSK.read(1) 			# read a byte
     while byte !="":			# while the file still has bytes in it
-        byte = DSK.read(1)	
-	if len(byte) > 0: 		# the last byte, for whatever reason, is length 0. Bah.
-	    BYTES.append(ord(byte))	# append the number representing the byte (0-255) to the BYTES array
+        BYTES.append(ord(byte))	# append the number representing the byte (0-255) to the BYTES array
+        byte = DSK.read(1)
 	
 except:
     print("\n\nOops. Is " + INPUTFILE + " a DSK file of 143kb?\n\n")
@@ -62,11 +61,10 @@ finally:
     sys.stdout.write("\r Starting.\n\n")
 
 
-    for TRACK in range(0,TRACKS,1):		# for each of the 35 tracks
+    for TRACK in range(TRACKS):		# for each of the 35 tracks
 	LINE=[]				# start a new line of pixels
-	for SECTOR in range(0,SECTORS*BYTESPERSECTOR,1):	# write the bytes for the sectors in that track to the line array
-	    offset = (SECTOR * TRACK) + SECTOR
-	    LINE.append(BYTES[(SECTOR * TRACK) + SECTOR])
+	for SECTOR in range(SECTORS*BYTESPERSECTOR):	# write the bytes for the sectors in that track to the line array
+	    LINE.append(BYTES[(SECTORS*BYTESPERSECTOR * TRACK) + SECTOR])
 
 	sys.stdout.write("\r Track: " + str(TRACK))
 	sys.stdout.flush()
@@ -92,7 +90,8 @@ OUTPUTFILE = os.path.join(INPUTFILE + ".png")
 
 
 try:
-	subprocess.call(['convert', 'DiskImageTEMP.png', '-matte', '-virtual-pixel', 'transparent', '-resize', '1024x1024!', '-rotate', '90', '-distort', 'Polar', '512 110 512,512 -180,180', OUTPUTFILE])
+	subprocess.call(['convert', 'DiskImageTEMP.png', '-scale', '100%x300%', '-resize', '3072x!', '(', '-size', '3072x115', 'pattern:horizontal3', '-negate', '-alpha', 'copy', '-fx', '#000', ')', '-composite', '-virtual-pixel', 'HorizontalTile', '-flip', '+distort', 'Polar', '1024 220', '-resize', '50%x50%', OUTPUTFILE])
+
 					# convert the 4096x35px image to a square, rotate, then rotate around an axis.
 except OSError:
     print("\n\nOops. This script requires ImageMagick: http://www.imagemagick.org/")
