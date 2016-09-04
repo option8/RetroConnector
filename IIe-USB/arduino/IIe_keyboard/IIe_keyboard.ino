@@ -8,13 +8,11 @@ http://www.pjrc.com/teensy/teensyduino.html
 #include <Keypad.h>
 
 
-
 /* 
 Declares the matrix rows/cols of the Apple IIe keyboard. 
 
 More information here:
 http://apple2.info/wiki/index.php?title=Pinouts#Apple_.2F.2Fe_Motherboard_keyboard_connector
-
 
 */
 
@@ -119,79 +117,88 @@ byte colPins[COLS] = { // X0 - X7
 Keypad KPD = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
 
+// these pins are special in that they are dis/connected to ground, instead of to a row/col
 const int  SHIFTPin = 21;    // the pin that the shift key is attached to
 const int  CTRLPin = 5;    // the pin that the control key is attached to
 const int  APPLEPin1 = 8;    // the pin that the open-apple key is attached to
 const int  APPLEPin2 = 9;    // the pin that the closed-apple key is attached to
-// these pins are special in that they are dis/connected to ground, instead of to a row/col
-const int CAPSPin = 7;
+const int  CAPSPin = 7;
 
-
+#define LED  6
 
 char modifierKeys[4];
 
 
+#define KEY_CAPS_UNLOCK  0
 
-
- #define KEY_CAPS_UNLOCK  0
-
-   boolean resetCapsLock = false;  // Allows one caps unlock signal.
-   unsigned long dTime = 0;
-   char CAPSState;  // Initialize this to a reasonable value.
+boolean resetCapsLock = false;  // Allows one caps unlock signal.
+unsigned long dTime = 0;
+boolean CAPSLock = false;  // Initialize this to a reasonable value.
    
-   boolean FKEYS = false; // used to set numbers to F-Key equivalent. currently tied to caps lock
+boolean FKEYS = false; // used to set numbers to F-Key equivalent. currently tied to caps lock
 
 
-void setup(){
+void setup()
+{
+  pinMode(SHIFTPin, INPUT_PULLUP);
+  digitalWrite(SHIFTPin, HIGH);
 
-  pinMode(SHIFTPin, INPUT);
-  pinMode(CTRLPin, INPUT);
+  pinMode(CTRLPin, INPUT_PULLUP);
+  digitalWrite(CTRLPin, HIGH);
+
   pinMode(APPLEPin1, INPUT);
-  pinMode(APPLEPin2, INPUT);
-
   digitalWrite(APPLEPin1, LOW);
+
+  pinMode(APPLEPin2, INPUT);
   digitalWrite(APPLEPin2, LOW);
 
-  digitalWrite(SHIFTPin, HIGH);
-  digitalWrite(CTRLPin, HIGH);
-  
-  pinMode(CAPSPin, INPUT);
+  pinMode(CAPSPin, INPUT_PULLUP);
   digitalWrite(CAPSPin, HIGH);
-  
- 
  
 // DEBUG
+//  Serial.begin(115200);
+  pinMode(LED, OUTPUT);
 
- //Serial.begin(115200);
- //Serial.println(CAPSState);
+  // This gives time for the keyboard to hook up to the PC.
+  // Otherwise the caps lock state may be incorrect.
+  delay(1000);
 
 }
+
 
 void loop()
 {
 //probably should be on an interrupt, to catch high->low transition 
 
-   // Only do something if the pin is different from previous state.
-   if ( (CAPSState!=digitalRead(CAPSPin)) && !resetCapsLock) {
-       CAPSState = digitalRead(CAPSPin);    // Remember new CAPSState.
-       Keyboard.set_key6(KEY_CAPS_LOCK);    // Send KEY_CAPS_LOCK.
-       dTime = millis();                    // Reset delay timer.
-       resetCapsLock = true;
-       
-       Serial.print("Caps = ");
-       Serial.println(CAPSState);
-       
-   }
-   if ( resetCapsLock && (millis()-dTime) > 10)  {
-       Keyboard.set_key6(KEY_CAPS_UNLOCK);
-       resetCapsLock = false;
+  // Only do something if the pin is different from previous state.
+  boolean newCaps = digitalRead(CAPSPin) ? false : true;
+
+  if ( (CAPSLock != newCaps) && !resetCapsLock)
+  {
+    CAPSLock = newCaps;    // Remember new CAPSLock.
+    Keyboard.set_key6(KEY_CAPS_LOCK);    // Send KEY_CAPS_LOCK.
+    dTime = millis();                    // Reset delay timer.
+    resetCapsLock = true;
+
+//    Serial.print("Caps = ");
+//    Serial.println(CAPSLock);
+
+    // Turn on the LED for caps lock.
+    digitalWrite(LED, CAPSLock ? HIGH : LOW);
+  
   }
 
-FKEYS = !CAPSState;
+  if ( resetCapsLock && (millis()-dTime) > 10)
+  {
+    Keyboard.set_key6(KEY_CAPS_UNLOCK);
+    resetCapsLock = false;
+  }
 
+  // If caps lock is set, then turn number keys into function keys.
+  FKEYS = CAPSLock;
 
-/*char CAPSState = digitalRead(CAPSPin);
-    if (CAPSState == LOW) {
+/*char CAPSLock = digitalRead(CAPSPin);
+    if (CAPSLock == LOW) {
       Keyboard.set_key6(KEY_CAPS_LOCK);
     } else {
       Keyboard.set_key6(0);89
@@ -202,9 +209,7 @@ FKEYS = !CAPSState;
 
     if (SHIFTState == LOW) {
       modifierKeys[0] = MODIFIERKEY_SHIFT;
-      digitalWrite(SHIFTPin, HIGH);
     } else {
-      digitalWrite(SHIFTPin, HIGH);
       modifierKeys[0] = 0;
     }
 
@@ -212,10 +217,8 @@ FKEYS = !CAPSState;
 
     if (CTRLState == LOW) {
       modifierKeys[1] = MODIFIERKEY_CTRL;
-      digitalWrite(CTRLPin, HIGH);
     } else {
       modifierKeys[1] = 0;
-      digitalWrite(CTRLPin, HIGH);
     }
 
    char OAPPLEState = digitalRead(APPLEPin1);
@@ -233,26 +236,18 @@ FKEYS = !CAPSState;
 */
 
 
-
 // *** NOW USING CLOSED APPLE AS ALT/OPTION
     if (OAPPLEState == HIGH) {
       modifierKeys[2] =  MODIFIERKEY_GUI;
-      digitalWrite(APPLEPin1, LOW);
     } else {
       modifierKeys[2] = 0;
-      digitalWrite(APPLEPin1, LOW);
     }
 
     if (CAPPLEState == HIGH) {
       modifierKeys[3] =  MODIFIERKEY_ALT;
-      digitalWrite(APPLEPin2, LOW);
     } else {
       modifierKeys[3] = 0;
-      digitalWrite(APPLEPin2, LOW);
     }
-
-
-
 
 
 // to use the TILDE key as ALT/OPTION
@@ -264,13 +259,9 @@ FKEYS = !CAPSState;
 
 // *** NOW USING CLOSED APPLE AS ALT/OPTION
 
-    Keyboard.set_modifier( modifierKeys[0] | modifierKeys[1] | modifierKeys[2] | modifierKeys[3] );
+  Keyboard.set_modifier( modifierKeys[0] | modifierKeys[1] | modifierKeys[2] | modifierKeys[3] );
 
-    KPD.getKeys(); // Scan for all pressed keys. 6 Max, + 4 modifiers. Should be plenty, but can be extended to 10+
-
-
-
-
+  KPD.getKeys(); // Scan for all pressed keys. 6 Max, + 4 modifiers. Should be plenty, but can be extended to 10+
 
 	// Set keyboard keys to default values.
 	Keyboard.set_key1(0);
@@ -280,42 +271,37 @@ FKEYS = !CAPSState;
 	Keyboard.set_key5(0);
 	//Keyboard.set_key6(0);
 
-
         
-        /* based on suggestion from Craig Brooks <s.craig.brooks@gmail.com>
-        uses CAPS LOCK to turn number keys into F-Key equivalent.
-        */
-        
-
+  /* based on suggestion from Craig Brooks <s.craig.brooks@gmail.com>
+     uses CAPS LOCK to turn number keys into F-Key equivalent.
+  */
 
 
 	// Update keyboard keys to active values.
-	if( KPD.key[0].kchar && ( KPD.key[0].kstate==PRESSED || KPD.key[0].kstate==HOLD )) {
+	if ( KPD.key[0].kchar && ( KPD.key[0].kstate==PRESSED || KPD.key[0].kstate==HOLD ))
+	{
+    //Serial.println(FKEYS);
+ 
+    if (FKEYS)
+    {
+      // number keys 1 through 0 for f1 - f10
+      if ((KPD.key[0].kchar >= 0x1E) &&  (KPD.key[0].kchar <= 0x27))
+      {
+        KPD.key[0].kchar += 0x1C;
+//      Serial.println( KPD.key[0].kchar, HEX );
+      }
+      else if ( KPD.key[0].kchar == 0x2D || KPD.key[0].kchar == 0x2E )
+      {
+//      - and = for f11 and f12
+        KPD.key[0].kchar += 0x17;
+      }
+    }
+    
+    Keyboard.set_key1( KPD.key[0].kchar );  
+  }
 
-            //Serial.println(FKEYS);
-        
-        
-                if (FKEYS) {
-                  // number keys 1 through 0 for f1 - f10
-                  if((KPD.key[0].kchar >= 0x1E) &&  (KPD.key[0].kchar <= 0x27)){
-                    KPD.key[0].kchar += 0x1C;
 
-                 //   Serial.println( KPD.key[0].kchar, HEX );
-
-                  // - and = for f11 and f12
-                  } else if( KPD.key[0].kchar == 0x2D || KPD.key[0].kchar == 0x2E ) {
-                    KPD.key[0].kchar += 0x17;
-                  }
-                  
-                  
-                }
-  
-      		Keyboard.set_key1( KPD.key[0].kchar );
-
-  
-        }
-
-	if( KPD.key[1].kchar && ( KPD.key[1].kstate==PRESSED || KPD.key[1].kstate==HOLD ))
+	if ( KPD.key[1].kchar && ( KPD.key[1].kstate==PRESSED || KPD.key[1].kstate==HOLD ))
 		Keyboard.set_key2( KPD.key[1].kchar );
 
 	if( KPD.key[2].kchar && ( KPD.key[2].kstate==PRESSED || KPD.key[2].kstate==HOLD ))
