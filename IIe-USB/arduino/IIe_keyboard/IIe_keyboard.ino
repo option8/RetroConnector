@@ -16,37 +16,40 @@ http://apple2.info/wiki/index.php?title=Pinouts#Apple_.2F.2Fe_Motherboard_keyboa
 
 */
 
+// Prevent compiler warning about casts from unsigned ints to chars
+#define C(x) ((char) (x))
+
 const byte ROWS = 10; // rows
 const byte COLS = 8; // columns
 char keys[ROWS][COLS] = {
 
   
-  {      KEY_ESC,     KEY_TAB,     KEY_A,       KEY_Z,  KEYPAD_SLASH , 0 ,  KEYPAD_ASTERIX,  KEY_ESC},
+  { C(KEY_ESC), C(KEY_TAB), C(KEY_A), C(KEY_Z), C(KEYPAD_SLASH), 0, C(KEYPAD_ASTERIX), C(KEY_ESC)},
   
-  {      KEY_1,      KEY_Q,       KEY_D,       KEY_X,  0,  0,  0,  0},
+  { C(KEY_1), C(KEY_Q), C(KEY_D), C(KEY_X),  0,  0,  0,  0},
   
-  {      KEY_2,      KEY_W,       KEY_S,       KEY_C,  KEYPAD_0,  KEYPAD_4,  KEYPAD_8,  0},
+  { C(KEY_2), C(KEY_W), C(KEY_S), C(KEY_C), C(KEYPAD_0), C(KEYPAD_4), C(KEYPAD_8),  0},
   
-  {      KEY_3,      KEY_E,       KEY_H,       KEY_V,  KEYPAD_1,  KEYPAD_5,  KEYPAD_9,  KEYPAD_MINUS},
+  { C(KEY_3), C(KEY_E), C(KEY_H), C(KEY_V), C(KEYPAD_1), C(KEYPAD_5), C(KEYPAD_9), C(KEYPAD_MINUS)},
   
-  {      KEY_4,      KEY_R,       KEY_F,       KEY_B,  KEYPAD_2,  KEYPAD_6,  KEYPAD_PERIOD,  KEYPAD_ENTER},
+  { C(KEY_4), C(KEY_R), C(KEY_F), C(KEY_B), C(KEYPAD_2), C(KEYPAD_6), C(KEYPAD_PERIOD), C(KEYPAD_ENTER)},
   
-  {      KEY_6,      KEY_Y,       KEY_G,       KEY_N,  KEYPAD_3,  KEYPAD_7,  KEYPAD_PLUS,  0},
+  { C(KEY_6), C(KEY_Y), C(KEY_G), C(KEY_N), C(KEYPAD_3), C(KEYPAD_7), C(KEYPAD_PLUS),  0},
   
-  {      KEY_5,      KEY_T,       KEY_J,       KEY_M,       KEY_BACKSLASH,     KEY_TILDE,      KEY_ENTER,  KEY_BACKSPACE},
+  { C(KEY_5), C(KEY_T), C(KEY_J), C(KEY_M), C(KEY_BACKSLASH), C(KEY_TILDE), C(KEY_ENTER), C(KEY_BACKSPACE)},
   
-  {      KEY_7,      KEY_U,       KEY_K,       KEY_COMMA,      KEY_EQUAL,       KEY_P,      KEY_UP,       KEY_DOWN },
+  { C(KEY_7), C(KEY_U), C(KEY_K), C(KEY_COMMA), C(KEY_EQUAL), C(KEY_P), C(KEY_UP), C(KEY_DOWN) },
   
-  {      KEY_8,      KEY_I,       KEY_SEMICOLON,      KEY_PERIOD,      KEY_0,       KEY_LEFT_BRACE,     KEY_SPACE,   KEY_LEFT },
+  { C(KEY_8), C(KEY_I), C(KEY_SEMICOLON), C(KEY_PERIOD), C(KEY_0), C(KEY_LEFT_BRACE), C(KEY_SPACE), C(KEY_LEFT) },
   
-  {      KEY_9,      KEY_O,       KEY_L,       KEY_SLASH,      KEY_MINUS,      KEY_RIGHT_BRACE,      KEY_QUOTE,      KEY_RIGHT },
+  { C(KEY_9), C(KEY_O), C(KEY_L), C(KEY_SLASH), C(KEY_MINUS), C(KEY_RIGHT_BRACE), C(KEY_QUOTE), C(KEY_RIGHT) },
 
 };
 
 
 char Fkeys[2][10] = {
-  {KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7, KEY_8, KEY_9, KEY_0 },
-  {KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F6, KEY_F7, KEY_F8, KEY_F9, KEY_F10 }
+  {C(KEY_1), C(KEY_2), C(KEY_3), C(KEY_4), C(KEY_5), C(KEY_6), C(KEY_7), C(KEY_8), C(KEY_9), C(KEY_0)},
+  {C(KEY_F1), C(KEY_F2), C(KEY_F3), C(KEY_F4), C(KEY_F5), C(KEY_F6), C(KEY_F7), C(KEY_F8), C(KEY_F9), C(KEY_F10)}
 };
 
 
@@ -126,7 +129,7 @@ const int  CAPSPin = 7;
 
 #define LED  6
 
-char modifierKeys[4];
+uint16_t modifierKeys[4];
 
 
 #define KEY_CAPS_UNLOCK  0
@@ -176,7 +179,7 @@ void loop()
   if ( (CAPSLock != newCaps) && !resetCapsLock)
   {
     CAPSLock = newCaps;    // Remember new CAPSLock.
-    Keyboard.set_key6(KEY_CAPS_LOCK);    // Send KEY_CAPS_LOCK.
+    Keyboard.set_key6((uint8_t) KEY_CAPS_LOCK);    // Send KEY_CAPS_LOCK.
     dTime = millis();                    // Reset delay timer.
     resetCapsLock = true;
 
