@@ -9,23 +9,23 @@ const int Butt1Pin = A5;
 
 #include <avr/pgmspace.h>
 
-#include <avrpins.h>
-#include <max3421e.h>
-#include <usbhost.h>
-#include <usb_ch9.h>
+//#include <avrpins.h>
+//#include <max3421e.h>
+//#include <usbhost.h>
+//#include <usb_ch9.h>
 #include <Usb.h>
 #include <usbhub.h>
 #include <avr/pgmspace.h>
-#include <address.h>
+//#include <address.h>
 #include <hid.h>
 #include <hiduniversal.h>
 
 #include "hidjoystickrptparser.h"
 
-#include <printhex.h>
-#include <message.h>
-#include <hexdump.h>
-#include <parsetools.h>
+//#include <printhex.h>
+//#include <message.h>
+//#include <hexdump.h>
+//#include <parsetools.h>
 
 USB                                             Usb;
 USBHub                                          Hub(&Usb);
