@@ -1,0 +1,33 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=M0100 USB
+*Date=16:51:24
+*CreatedBy=Fritzing 0.9.2b.11.19.8d2d5970658f0bed09c661c9ea9a515b5f40f44c
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;;9.8806;-23.1336;0;Bottom;Copper Fill12
+2;;;1.48339;-10.3454;90;Bottom;TXT2
+3;;;15.8496;-22.2954;0;Bottom;Copper Fill1
+4;;;16.2408;-25.5836;0;Bottom;Trinket Pro 5V
+5;;;3.4925;-33.6238;0;Bottom;Copper Fill7
+6;;;12.0396;-5.6838;0;Bottom;Copper Fill6
+7;;;10.8712;-38.3736;0;Bottom;Copper Fill2
+8;;;29.5819;-23.5078;90;Bottom;TXT1
+9;;;19.7358;-12.6688;0;Bottom;Copper Fill5
+10;;3362u-2;3.64236;-36.9514;90;Bottom;TRIM
+11;;db9;15.8272;-3.47458;180;Bottom;1
+12;;;24.638;-37.1671;0;Bottom;Copper Fill10
+13;;;10.541;-30.779;0;Bottom;Copper Fill3
+14;;;22.479;-20.873;0;Bottom;Copper Fill11
+15;;;22.9616;-37.1671;0;Bottom;Copper Fill9
+16;;;15.8496;-22.2954;0;Bottom;Copper Fill13
+17;;;9.8806;-23.1336;0;Bottom;Copper Fill4
+18;;;2.6162;-34.4747;0;Bottom;Copper Fill8

@@ -1,4 +1,4 @@
-/* requires keypad library by Mark Stanley, Alexander Brevig from:
+ /* requires keypad library by Mark Stanley, Alexander Brevig from:
 http://www.arduino.cc/playground/Code/Keypad
 
 Uses the PJRC Teensy++ 2.0 and Teensyduino libraries, specifically USB HID and Keyboard():
@@ -6,7 +6,6 @@ http://www.pjrc.com/teensy/teensyduino.html
 */
 
 #include <Keypad.h>
-
 
 
 /* 
@@ -61,13 +60,13 @@ YO      ESC     TAB     A       Z   |   /       )       *       ESC
                                     |
 Y1      1!      Q       D       X   |   DOWN    UP      LEFT    RIGHT
                                     |
-Y2      20      W       S       C   |   0       4       8       (
+Y2      2@      W       S       C   |   0       4       8       (
                                     |
-Y3      34      E       H       V   |   1       5       9       -
+Y3      3#      E       H       V   |   1       5       9       -
                                     |
 Y4      4$      R       F       S   |   2       6       .       RETURN
                                     |
-Y5      6"      Y       G       N   |   3       7       +       ,
+Y5      6^      Y       G       N   |   3       7       +       ,
                                     +----------------------------------
 Y6      5%      T       J       M       \|      `~      RETURN  DELETE
 

@@ -1,0 +1,40 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=USB_IIe_Kbd_rev4-a
+*Date=20:52:08
+*CreatedBy=Fritzing 0.9.2b.11.19.8d2d5970658f0bed09c661c9ea9a515b5f40f44c
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;;31.7035;-13.618;0;Bottom;Via1
+2;;[THT];16.3883;-70.4232;0;Bottom;S1
+3;;THT;68.4866;-59.9296;0;Bottom;5v1
+4;5V;TO220 [THT];4.14445;-67.593;-90;Bottom;3v
+5;;;16.4064;-65.5825;0;Bottom;IMG2
+6;;DIP (Dual Inline) [THT];57.1035;-29.493;-90;Bottom;CD4051B
+7;;THT;52.0235;-5.87102;90;Bottom;TO BOARD
+8;;THT;52.0235;-18.19;-90;Bottom;PASSTHROUGH
+9;;;29.8476;-19.1536;0;Bottom;TXT4
+10;;DIP (Dual Inline) [THT];53.2466;-65.0096;90;Bottom;UHS Mini
+11;;;9.11536;-67.4776;0;Bottom;TXT1
+12;;;31.7035;-20.603;0;Bottom;Via2
+13;470;THT;40.5935;-28.223;-90;Bottom;R3
+14;;THT;54.4735;-39.653;0;Bottom;XTAL
+15;;;30.3912;-7.35701;0;Bottom;TXT4
+16;;;5.93597;-3.20137;0;Bottom;TXT7
+17;;DIP (Dual Inline) [THT];17.7335;-33.303;-90;Bottom;CD74HC4067
+18;;;17.6532;-55.1484;0;Bottom;TXT6
+19;;;15.1794;-57.8333;0;Bottom;TXT5
+20;;;30.2231;-4.18912;0;Bottom;TXT4
+21;;;9.51963;-64.3296;0;Bottom;TXT2
+22;;dip;52.0235;-48.543;-90;Bottom;ATMEGA328
+23;;;29.8871;-16.021;0;Bottom;TXT4
+24;;[THT];29.7233;-70.3681;0;Bottom;CTL RESET
+25;470;THT;37.4185;-28.223;-90;Bottom;R2
