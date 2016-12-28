@@ -1,0 +1,27 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=USB_Mouse_Interface
+*Date=16:01:12
+*CreatedBy=Fritzing 0.9.3b.04.19.5c895d327c44a3114e5fcc9d8260daf0cbb52806
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;;8.20992;-36.8701;-90;Bottom;TXT2
+2;;;5.75066;-37.5794;-90;Bottom;TXT1
+3;;;11.4907;-44.2229;-90;Bottom;TXT3
+4;;;5.68125;-6.75876;0;Bottom;TXT1
+5;;dip;25.4637;-32.6627;180;Bottom;ATMEGA328
+6;;db9;16.1137;-3.43265;180;Bottom;1
+7;;;10.5611;-13.5106;0;Bottom;TXT2
+8;;DIP (Dual Inline) [THT];10.2237;-35.2027;0;Bottom;UHS Mini
+9;1µF;100 mil [THT, electrolytic];6.09623;-16.4702;180;Bottom;C1
+10;;THT;15.3037;-49.1727;-90;Bottom;5v
+11;;THT;17.2087;-14.0202;90;Bottom;XTAL
+12;5V;TO220 [THT];5.77873;-9.54865;180;Bottom;3v

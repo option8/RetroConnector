@@ -569,7 +569,7 @@ char* macrostrings[5]= {
 void KbdRptParser::PrintLine(int macro)	
 {
   
-  int CharDelay = 60;
+  int CharDelay = 30;
   
   //10 print pdl(0) " " pdl(1) " " peek(-16287) " " peek(-16286) : goto 10
   
@@ -593,6 +593,7 @@ void KbdRptParser::PrintLine(int macro)
     } else {
      SHIFTDOWN = 0;
     }
+    delay(CharDelay);
     
     OnKeyDown(SHIFTDOWN,KEYMAP[MacroString[letters]][0]);
     
