@@ -1,4 +1,4 @@
-/*
+ /*
  *  Converts Apple M0100 mouse to USB, using Adafruit Trinket Pro 5v. 
  * 
  *  Accelerated mouse tracking, based on speed. Faster movement
@@ -8,7 +8,7 @@
  * 
  */
 
-
+ 
 
 #include <cmdline_defs.h>
 #include <ProTrinketMouse.h>
