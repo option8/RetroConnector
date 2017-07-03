@@ -4,7 +4,16 @@
 
   Mac Plus: 4+
   Apple IIe (MousePaint): 6-8
+  Apple IIc: ?
 
+
+  Two options for emulating variable speed mouse movement: 
+  
+  1 - Change quadtrature wavelength/frequency based on movement speed (distance/time).
+  2 - Multiply single movement by distance moved in fixed polling time.
+  
+  Opted for option 2 after 1 proved to be too touchy. May go back to 1 since the new hardware is more stable than prototype.
+    
 */
 
 
@@ -27,13 +36,17 @@ int XDIR = 1;
 int YMOVE = 2;
 int YDIR = 0;
 int CLICKPIN = 4;
+
 long XDELAY;
 long YDELAY;
-long MOVEMENTBASE = 20;
+
+long MOVEMENTBASE = 20;  // "tracking speed" determines how quickly to update the quadrature square wave
+
 int MOVEMENTFACTORX = 0;
 int MOVEMENTFACTORY = 0;
-int MOVEMENTTHRESHOLD = 0;
-int MOVEMENTDENOM = 8;
+
+int MOVEMENTTHRESHOLD = 0; // minimum movement required before triggering a movemouse action
+int MOVEMENTDENOM = 8; // movement speed factor
 
 class MouseRptParser : public MouseReportParser
 {
@@ -49,20 +62,15 @@ class MouseRptParser : public MouseReportParser
 void MouseRptParser::OnMouseMove(MOUSEINFO *mi)
 {
 
-  //  XDELAY =  MOVEMENTBASE + (1 - (abs(mi->dX) / 255.000)) * MOVEMENTFACTOR;
-  // YDELAY =  MOVEMENTBASE + (1 - (abs(mi->dY) / 127.000)) * MOVEMENTFACTOR;
-  //  Serial.print("dx=");
-  //    Serial.println(XDELAY);
-  // Serial.print(" dy=");
-  //   Serial.println(YDELAY);
-  // delayMicroseconds(XDELAY);
-
-
-  MOVEMENTFACTORX = 1 + (abs(mi->dX)) / MOVEMENTDENOM;
+  MOVEMENTFACTORX = 1 + (abs(mi->dX)) / MOVEMENTDENOM; // repeat the MouseMove (movement distance)/(movement speed factor) times
+  
   //Serial.println(MOVEMENTFACTOR);
   for (int i = 0; i < MOVEMENTFACTORX; i++) {
 
-    if (mi->dX > MOVEMENTTHRESHOLD) {
+    if (mi->dX > MOVEMENTTHRESHOLD) { 
+      /* if the mouse moved enough to trigger the move event. Zero threshold results in jittering, 
+       *  higher thresholds mean slow movements aren't tracked at all.
+      */
 
       delayMicroseconds(MOVEMENTBASE);
       digitalWrite(XMOVE, HIGH);
@@ -72,7 +80,18 @@ void MouseRptParser::OnMouseMove(MOUSEINFO *mi)
       digitalWrite(XMOVE, LOW);
       delayMicroseconds(MOVEMENTBASE);
       digitalWrite(XDIR, LOW);
+/*
 
+This roughly equates to bitbanging a quadtrature square wave. It's ugly, but it works, ish.
+
+See http://m0100.com/ for a quick explanation of how the M0100 mouse works, and what the host computer is expecting to see.
+
+ .___.
+_|   |___ X-MOVEMENT
+   .___.
+___|   |_ X-DIRECTION
+
+*/
     }
     if (mi->dX < -1 * MOVEMENTTHRESHOLD) {
       delayMicroseconds(MOVEMENTBASE);
@@ -114,34 +133,6 @@ void MouseRptParser::OnMouseMove(MOUSEINFO *mi)
     }
 
   }
-  /*
-  XDIR = XMOVE = LOW
-
-      if X > 0
-        XMOVE HIGH
-        delay
-        XDIR HIGH
-        delay
-        XMOVE LOW
-        delay
-        XDIR LOW
-
-      else if X < 0
-        XDIR HIGH
-        delay
-        XMOVE HIGH
-        delay
-        XDIR LOW
-        delay
-        XMOVE LOW
-
-
-
-
-
-  */
-
-
 
 };
 void MouseRptParser::OnLeftButtonUp	(MOUSEINFO *mi)
@@ -158,7 +149,7 @@ void MouseRptParser::OnRightButtonUp	(MOUSEINFO *mi)
 {
   //  Serial.println("R Butt Up");
 };
-void MouseRptParser::OnRightButtonDown	(MOUSEINFO *mi)
+void MouseRptParser::OnRightButtonDown	(MOUSEINFO *mi) // changes "tracking speed" variable on right click
 {
 
   if (MOVEMENTBASE < 200) {
@@ -197,12 +188,17 @@ void setup()
 
 
 
-  /* Serial.begin( 115200 );
+  /* SERIAL FOR DEBUGGING
+ 
+ 
+ Serial.begin( 115200 );
   #if !defined(__MIPSEL__)
    while (!Serial); // Wait for serial port to connect - used on Leonardo, Teensy and other boards with built-in USB CDC serial connection
   #endif
    Serial.println("Start");
+   
   */
+  
   if (Usb.Init() == -1)
     Serial.println("OSC did not start.");
 
@@ -212,15 +208,11 @@ void setup()
 
   HidMouse.SetReportParser(0, (HIDReportParser*)&Prs);
 
-
-
   digitalWrite(XMOVE, LOW);
   digitalWrite(XDIR, LOW);
   digitalWrite(YMOVE, LOW);
   digitalWrite(YDIR, LOW);
   digitalWrite(CLICKPIN, HIGH);
-
-
 
 }
 
